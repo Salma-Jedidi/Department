@@ -1,33 +1,39 @@
 package com.example.GestionDepartement.Services.Imp;
 
-import com.example.GestionDepartement.Services.serviceEtudiant;
-import com.example.GestionDepartement.Entities.*;
+import com.example.GestionDepartement.Entities.Abscentisme;
+import com.example.GestionDepartement.Entities.Etudiant;
+import com.example.GestionDepartement.Entities.Evenement;
+import com.example.GestionDepartement.Entities.Reussite;
 import com.example.GestionDepartement.Repositories.EtudiantRepo;
 import com.example.GestionDepartement.Repositories.EventRepo;
+import com.example.GestionDepartement.Services.serviceEtudiant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
-
 @Service
-public class serviceEtudImp implements serviceEtudiant{
+public class serviceEtudImp implements serviceEtudiant {
     @Autowired
     EtudiantRepo etudiantRepo;
     @Autowired
     EventRepo eventRepo;
-    public Etudiant addEtudiant(Etudiant etudiant){
+
+    public Etudiant addEtudiant(Etudiant etudiant) {
+        System.out.println("Ajout de l'étudiant : {}");
         return etudiantRepo.save(etudiant);
     }
+
     @Override
-    public Evenement addEvent(Evenement event){
+    public Evenement addEvent(Evenement event) {
         return eventRepo.save(event);
     }
+
     @Override
     public void marquerPresence(String nomEtudiant, Date jourCours, LocalTime heureCours) {
 
-        Etudiant etudiant = etudiantRepo.findByNom(nomEtudiant);
+        Etudiant etudiant = etudiantRepo.findByNomEtudiant(nomEtudiant);
 
         if (etudiant != null) {
 
@@ -40,12 +46,14 @@ public class serviceEtudImp implements serviceEtudiant{
             }
         }
     }
+
     @Override
     public void marquerReussite(Etudiant etudiant) {
 
         etudiant.setReussite(Reussite.REUSSI);
         etudiantRepo.save(etudiant);
     }
+
     @Override
     public double calculerPourcentageAbsentisme() {
 
@@ -75,5 +83,15 @@ public class serviceEtudImp implements serviceEtudiant{
         double pourcentageReussite = (double) nombreReussite / etudiants.size() * 100;
 
         return pourcentageReussite;
+    }
+
+    @Override
+    public Etudiant getEtudiant(Integer id) {
+        return etudiantRepo.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Etudiant> getAllEtudiants() {
+        return etudiantRepo.findAll();
     }
 }

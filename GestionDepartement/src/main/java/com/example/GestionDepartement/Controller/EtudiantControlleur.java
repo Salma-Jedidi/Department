@@ -4,7 +4,6 @@ import com.example.GestionDepartement.Entities.Etudiant;
 import com.example.GestionDepartement.Entities.Evenement;
 import com.example.GestionDepartement.Services.serviceEtudiant;
 import lombok.AllArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,12 +23,12 @@ public class EtudiantControlleur {
     public void marquerPresence(@RequestBody Etudiant etudiant) {
         serviceEtudiant.marquerReussite(etudiant);
     }
-    @PreAuthorize("permitAll()")
+
     @PostMapping("/addEtudiant")
     public Etudiant addEtudiant(@RequestBody Etudiant etudiant){
         return serviceEtudiant.addEtudiant(etudiant);
     }
-    @PreAuthorize("permitAll()")
+
     @PostMapping("/addEvent")
     public Evenement addEvent(@RequestBody Evenement event){
         return serviceEtudiant.addEvent(event);

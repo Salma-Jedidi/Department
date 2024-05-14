@@ -4,5 +4,6 @@ import com.example.GestionDepartement.Entities.Etudiant;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EtudiantRepo extends JpaRepository<Etudiant, Integer> {
-    Etudiant findByNom(String nomEtudiant);
+    Etudiant findByNomEtudiant(String nom);
+
 }
