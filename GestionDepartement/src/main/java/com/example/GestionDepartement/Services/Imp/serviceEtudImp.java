@@ -48,9 +48,10 @@ public class serviceEtudImp implements serviceEtudiant {
     }
 
     @Override
-    public void marquerReussite(Etudiant etudiant) {
+    public void marquerReussite(String nomEtudiant,Reussite reussite) {
+        Etudiant etudiant = etudiantRepo.findByNomEtudiant(nomEtudiant);
 
-        etudiant.setReussite(Reussite.REUSSI);
+        etudiant.setReussite(reussite);
         etudiantRepo.save(etudiant);
     }
 

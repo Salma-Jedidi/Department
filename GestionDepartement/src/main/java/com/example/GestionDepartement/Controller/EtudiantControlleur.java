@@ -2,26 +2,26 @@ package com.example.GestionDepartement.Controller;
 
 import com.example.GestionDepartement.Entities.Etudiant;
 import com.example.GestionDepartement.Entities.Evenement;
+import com.example.GestionDepartement.Entities.Reussite;
 import com.example.GestionDepartement.Services.serviceEtudiant;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalTime;
 import java.util.Date;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/etudiants")
 public class EtudiantControlleur {
     private final serviceEtudiant serviceEtudiant;
     @PostMapping("/marquer-presence")
     public void marquerPresence(@RequestBody String nomEtudiant, Date jourCours, LocalTime heureCours) {
         serviceEtudiant.marquerPresence(nomEtudiant,jourCours,heureCours);
     }
-    @PostMapping("/marquer-reussite")
-    public void marquerPresence(@RequestBody Etudiant etudiant) {
-        serviceEtudiant.marquerReussite(etudiant);
+    @PutMapping("/marquer-reussite")
+    public void marquerReussite(@RequestParam String nomEtudiant, @RequestParam Reussite reussite) {
+        serviceEtudiant.marquerReussite(nomEtudiant, reussite);
     }
 
     @PostMapping("/addEtudiant")

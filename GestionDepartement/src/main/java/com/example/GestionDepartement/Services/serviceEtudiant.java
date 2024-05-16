@@ -2,6 +2,7 @@ package com.example.GestionDepartement.Services;
 
 import com.example.GestionDepartement.Entities.Etudiant;
 import com.example.GestionDepartement.Entities.Evenement;
+import com.example.GestionDepartement.Entities.Reussite;
 
 import java.time.LocalTime;
 import java.util.Date;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public interface serviceEtudiant {
     public Etudiant addEtudiant(Etudiant etudiant);
-    public void marquerReussite(Etudiant etudiant);
+    public void marquerReussite(String nomEtudiant, Reussite reussite);
 
     Evenement addEvent(Evenement event);
 
